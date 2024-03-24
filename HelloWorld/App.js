@@ -2,6 +2,12 @@ import { View, StyleSheet, Text } from "react-native";
 export default function App() {
   return (
     <View style={styles.container}>
+      <View style={styles.darkMode}>
+        <Text style={styles.textDarkMode}>
+          Text Inheritance
+          <Text style={styles.textBold}> in bold</Text>
+        </Text>
+      </View>
       <View style={[styles.box, styles.lightBlueBg, styles.boxShadow]}>
         <Text>Lightblue box</Text>
       </View>
@@ -20,8 +26,8 @@ const styles = StyleSheet.create({
     padding: 60,
   },
   box: {
-    width: 100,
-    height: 100,
+    width: "250",
+    height: "25%",
     marginHorizontal: 10,
     marginVertical: 20,
     borderWidth: 2,
@@ -47,5 +53,15 @@ const styles = StyleSheet.create({
   },
   androidShadow: {
     elevation: 20,
+  },
+  darkMode: {
+    backgroundColor: "black",
+    color: "white",
+  },
+  textDarkMode: {
+    color: "white",
+  },
+  textBold: {
+    fontWeight: "bold",
   },
 });
