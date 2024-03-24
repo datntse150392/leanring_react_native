@@ -3,9 +3,9 @@ import Box from "./components/Box";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Box style={{ backgroundColor: "red" }}>1</Box>
-      <Box style={{ backgroundColor: "yellow" }}>1</Box>
-      <Box style={{ backgroundColor: "green" }}>1</Box>
+      <Box style={{ backgroundColor: "red", flex: 1 }}>1</Box>
+      <Box style={{ backgroundColor: "yellow", flex: 2 }}>1</Box>
+      <Box style={{ backgroundColor: "green", flex: 3 }}>1</Box>
     </View>
   );
 }
