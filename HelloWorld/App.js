@@ -1,15 +1,23 @@
-import { useState } from "react";
-import { View, StatusBar, ActivityIndicator, Button } from "react-native";
+import { View, Button, Alert } from "react-native";
 const Logo = require("./assets/icon.png");
 export default function App() {
-  const [loading, setLoading] = useState(false);
   return (
     <View style={{ flex: 1, backgroundColor: "plum", padding: 60 }}>
       <Button
-        onPress={() => setLoading(true)}
-        title="Display Activity Indicator"
+        title="Alert"
+        onPress={() =>
+          Alert.alert("Invalid Data!", "DOB invalid", [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+            },
+            {
+              text: "OK",
+              onPress: () => console.log("OK Pressed"),
+            },
+          ])
+        }
       />
-      <ActivityIndicator size={"large"} animating={loading}></ActivityIndicator>
     </View>
   );
 }
