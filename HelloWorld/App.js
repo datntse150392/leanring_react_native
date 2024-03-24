@@ -1,18 +1,23 @@
-import { View, Pressable, Image, Text } from "react-native";
-
+import { useState } from "react";
+import { View, Image, Text, Modal, Button } from "react-native";
 const Logo = require("./assets/icon.png");
 export default function App() {
+  const [isVisableModal, setIsVisableModal] = useState(false);
   return (
     <View style={{ flex: 1, backgroundColor: "plum", padding: 60 }}>
-      <Pressable onPress={() => console.log("Text Press")}>
-        <Text>Image Gallery</Text>
-      </Pressable>
-      <Pressable onPress={() => console.log("Image Press")}>
-        <Image style={{ width: "100%", height: 200 }} source={Logo}></Image>
-      </Pressable>
-      <Pressable onLongPress={() => console.log("Image onLongPress")}>
-        <Image style={{ width: "100%", height: 200 }} source={Logo}></Image>
-      </Pressable>
+      <Button title="Open Modal" onPress={() => setIsVisableModal(true)} />
+      <Modal
+        visible={isVisableModal}
+        onRequestClose={() => setIsVisableModal(false)}
+        animationType="slide"
+        presentationStyle="pageSheet"
+      >
+        <View>
+          <Image source={Logo} style={{ width: 200, height: 200 }} />
+          <Text>Image Gallery</Text>
+          <Button title="Closed" onPress={() => setIsVisableModal(false)} />
+        </View>
+      </Modal>
     </View>
   );
 }
