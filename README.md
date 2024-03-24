@@ -23,3 +23,7 @@
 ### h. React Styled Components
 
 ### ...
+
+# 2. Expo vs ReactNative
+
+###
