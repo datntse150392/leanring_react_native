@@ -24,5 +24,7 @@ const styles = StyleSheet.create({
     marginTop: 64,
     borderWidth: 10,
     borderColor: "blue",
+    rowGap: 20,
+    columnGap: 20,
   },
 });
