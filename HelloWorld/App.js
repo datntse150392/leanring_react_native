@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   container: {
     height: 300,
     flexWrap: "wrap",
+    alignContent: "center",
     flexDirection: "column",
     backgroundColor: "#fff",
     alignItems: "baseline",
