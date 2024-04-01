@@ -3,10 +3,9 @@ import Box from "./components/Box";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Box style={{ backgroundColor: "red", flexShrink: 1 }}>Box 1 shrink</Box>
-      <Box style={{ backgroundColor: "yellow", flexShrink: 1 }}>
-        Box 2 shink
-      </Box>
+      <Box style={{ backgroundColor: "red", flexGrow: 2 }}>Box 1 shrink</Box>
+      <Box style={{ backgroundColor: "yellow", flexGrow: 3 }}>Box 2 shink</Box>
+      <Box style={{ backgroundColor: "pink" }}>Box 2 shink</Box>
     </View>
   );
 }
@@ -14,11 +13,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: 200,
+    width: "100%",
     marginTop: 64,
     borderWidth: 10,
     borderColor: "blue",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "flex-start",
   },
 });
