@@ -1,36 +1,36 @@
-import { View, StyleSheet, Text } from "react-native";
-import Box from "./components/Box";
+import { View, StyleSheet, Text, Dimensions } from "react-native";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Box style={{ backgroundColor: "red" }}>Box 1 shrink</Box>
-      <Box style={{ backgroundColor: "yellow", top: 75, left: 100 }}>
-        Box 2 shink
-      </Box>
-      <Box style={{ backgroundColor: "pink" }}>Box 3 shink</Box>
-      <Box
-        style={{
-          backgroundColor: "orange",
-          position: "absolute",
-          bottom: 100,
-          right: 100,
-        }}
-      >
-        Box 4 shink
-      </Box>
-      <Box style={{ backgroundColor: "black" }}>Box 5 shink</Box>
+      <View style={styles.box}>
+        <Text style={styles.text}>Welcome to React Native!</Text>
+      </View>
     </View>
   );
 }
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
     marginTop: 64,
-    borderWidth: 10,
-    borderColor: "blue",
-    flexDirection: "column",
-    justifyContent: "flex-start",
+    backgroundColor: "plum",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  box: {
+    borderColor: "black",
+    backgroundColor: "blue",
+    width: windowWidth > 500 ? "50%" : "70%",
+    height: windowHeight > 800 ? "50%" : "70%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: windowHeight > 800 ? 30 : 20,
+    textAlign: "center",
   },
 });
