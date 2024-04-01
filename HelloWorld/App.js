@@ -3,9 +3,22 @@ import Box from "./components/Box";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Box style={{ backgroundColor: "red", flexGrow: 2 }}>Box 1 shrink</Box>
-      <Box style={{ backgroundColor: "yellow", flexGrow: 3 }}>Box 2 shink</Box>
-      <Box style={{ backgroundColor: "pink" }}>Box 2 shink</Box>
+      <Box style={{ backgroundColor: "red" }}>Box 1 shrink</Box>
+      <Box style={{ backgroundColor: "yellow", top: 75, left: 100 }}>
+        Box 2 shink
+      </Box>
+      <Box style={{ backgroundColor: "pink" }}>Box 3 shink</Box>
+      <Box
+        style={{
+          backgroundColor: "orange",
+          position: "absolute",
+          bottom: 100,
+          right: 100,
+        }}
+      >
+        Box 4 shink
+      </Box>
+      <Box style={{ backgroundColor: "black" }}>Box 5 shink</Box>
     </View>
   );
 }
