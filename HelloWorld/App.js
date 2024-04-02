@@ -1,11 +1,10 @@
-import { View, StyleSheet, Text, SafeAreaView } from "react-native";
+import { View, StyleSheet, SafeAreaView, Platform } from "react-native";
+import PokemonCard from "./components/PokemonCard";
 export default function App() {
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.container}>
-        <View style={[styles.box]}>
-          <Text style={[styles.text]}>Welcome to React Native!</Text>
-        </View>
+        <PokemonCard />
       </View>
     </SafeAreaView>
   );
@@ -13,20 +12,16 @@ export default function App() {
 
 const styles = StyleSheet.create({
   safeAreaView: {
-    backgroundColor: "plum",
+    backgroundColor: "f5f5f5",
     flex: 1,
   },
   container: {
     flex: 1,
-    backgroundColor: "plum",
-    alignItems: "center",
-  },
-  box: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 30,
+    backgroundColor: "f5f5f5",
+    ...Platform.select({
+      ios: {
+        paddingTop: 20,
+      },
+    }),
   },
 });
