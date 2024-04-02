@@ -10,12 +10,17 @@ export default function PokemonCard({
 }) {
   return (
     <View style={styles.card}>
-      <View>
-        <Text>{name}</Text>
-        <Text>{hp}</Text>
+      <View style={styles.nameContainenr}>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.hp}>❤{hp}</Text>
       </View>
 
-      <Image source={image} accessibilityLabel={`${name} pokemon`} />
+      <Image
+        style={styles.image}
+        source={image}
+        accessibilityLabel={`${name} pokemon`}
+        resizeMode="contain"
+      />
 
       <View>
         <Text>{type}</Text>
@@ -53,5 +58,23 @@ const styles = StyleSheet.create({
         elevation: 5,
       },
     }),
+  },
+  nameContainenr: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 32,
+  },
+  name: {
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  hp: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  image: {
+    width: "100%",
+    height: 200,
   },
 });
