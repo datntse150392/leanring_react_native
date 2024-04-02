@@ -1,5 +1,24 @@
 import { View, Text, StyleSheet, Platform, Image } from "react-native";
 
+const getTypeDetails = (type) => {
+  switch (type.toLowerCase()) {
+    case "electric":
+      return { borderColor: "#FFD700", emoji: "⚡" };
+    case "water": {
+      return { borderColor: "#6493EA", emoji: "💧" };
+    }
+    case "fire": {
+      return { borderColor: "#FF5733", emoji: "🔥" };
+    }
+    case "grass": {
+      return { borderColor: "#4CAF50", emoji: "🌿" };
+    }
+    default: {
+      return { borderColor: "#A8B820", emoji: "🐛" };
+    }
+  }
+};
+
 export default function PokemonCard({
   name,
   image,
@@ -8,6 +27,7 @@ export default function PokemonCard({
   moves,
   weakneeses,
 }) {
+  const { borderColor, emoji } = getTypeDetails(type);
   return (
     <View style={styles.card}>
       <View style={styles.nameContainenr}>
@@ -22,16 +42,21 @@ export default function PokemonCard({
         resizeMode="contain"
       />
 
-      <View>
-        <Text>{type}</Text>
+      <View style={styles.typeContainer}>
+        <View style={[styles.badge, { borderColor }]}>
+          <Text style={styles.typeEmoji}>{emoji}</Text>
+          <Text style={styles.typeText}>{type}</Text>
+        </View>
       </View>
 
-      <View>
-        <Text>Moves: {moves && moves.join(", ")}</Text>
+      <View style={styles.movesContainer}>
+        <Text style={styles.movesText}>Moves: {moves && moves.join(", ")}</Text>
       </View>
 
-      <View>
-        <Text>Weakneeses: {weakneeses && weakneeses.join(", ")}</Text>
+      <View style={styles.weakneesesContainer}>
+        <Text style={styles.weakneesesText}>
+          Weakneeses: {weakneeses && weakneeses.join(", ")}
+        </Text>
       </View>
     </View>
   );
@@ -76,5 +101,41 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 200,
+  },
+
+  typeContainer: {
+    marginBottom: 40,
+    alignItems: "center",
+  },
+  badge: {
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    borderWidth: 4,
+    marginTop: 20,
+    width: "35%",
+  },
+  typeEmoji: { fontSize: 30, marginRight: 12 },
+  typeText: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+
+  movesContainer: {
+    marginBottom: 16,
+  },
+  movesText: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  weakneesesContainer: {
+    marginBottom: 8,
+  },
+  weakneesesText: {
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
