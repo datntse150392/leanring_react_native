@@ -37,7 +37,7 @@ export default function PokemonCard({
 
       <Image
         style={styles.image}
-        source={image}
+        source={{ uri: image }}
         accessibilityLabel={`${name} pokemon`}
         resizeMode="contain"
       />

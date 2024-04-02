@@ -1,0 +1,36 @@
+{
+  "pokemon": [
+    {
+      "name": "Charmander",
+      "image": "https://w7.pngwing.com/pngs/9/929/png-transparent-pokemon-charmander-pikachu-pokemon-x-and-y-charmander-charizard-charmander-food-orange-vertebrate-thumbnail.png",
+      "type": "Fire",
+      "hp": 39,
+      "moves": ["Scratch", "Ember", "Growl", "Leer"],
+      "weaknesses": ["Water", "Ground", "Rock"]
+    },
+    {
+      "name": "Squirtle",
+      "image": "./assets/squirtle.jpg",
+      "type": "Water",
+      "hp": 44,
+      "moves": ["Tackle", "Tail Whip", "Bubble", "Water Gun"],
+      "weaknesses": ["Electric", "Grass"]
+    },
+    {
+      "name": "Bulbasaur",
+      "image": "./assets/bulbasaur.png",
+      "type": "Grass",
+      "hp": 45,
+      "moves": ["Tackle", "Growl", "Leech Seed", "Vine Whip"],
+      "weaknesses": ["Fire", "Flying", "Ice", "Psychic"]
+    },
+    {
+      "name": "Pikachu",
+      "image": "./assets/pikachul.png",
+      "type": "Electric",
+      "hp": 35,
+      "moves": ["Quick Attack", "Thunder Shock", "Growl", "Tail Whip"],
+      "weaknesses": ["Ground"]
+    }
+  ]
+}
