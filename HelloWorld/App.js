@@ -1,22 +1,38 @@
-import { View, StyleSheet, Text, Dimensions } from "react-native";
+import { View, StyleSheet, Text, useWindowDimensions } from "react-native";
 export default function App() {
+  const windowWidth = useWindowDimensions().width;
+  const windowHeight = useWindowDimensions().height;
   return (
     <View style={styles.container}>
-      <View style={styles.box}>
-        <Text style={styles.text}>Welcome to React Native!</Text>
+      <View
+        style={[
+          styles.box,
+          {
+            width: windowWidth > 500 ? "70%" : "90%",
+            height: windowHeight > 800 ? "60%" : "90%",
+          },
+        ]}
+      >
+        <Text
+          style={[
+            styles.text,
+            {
+              fontSize: windowWidth > 500 ? 30 : 20,
+              color: "white",
+            },
+          ]}
+        >
+          Welcome to React Native!
+        </Text>
       </View>
     </View>
   );
 }
 
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    marginTop: 64,
     backgroundColor: "plum",
     alignItems: "center",
     justifyContent: "center",
@@ -24,13 +40,11 @@ const styles = StyleSheet.create({
   box: {
     borderColor: "black",
     backgroundColor: "blue",
-    width: windowWidth > 500 ? "50%" : "70%",
-    height: windowHeight > 800 ? "50%" : "70%",
+
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
-    fontSize: windowHeight > 800 ? 30 : 20,
     textAlign: "center",
   },
 });
