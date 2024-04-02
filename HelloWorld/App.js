@@ -26,6 +26,7 @@ export default function App() {
         }}
         // KeyExtractor is a function that takes an item and returns a unique key for that item.
         keyExtractor={(item) => item.name}
+        ItemSeparatorComponent={<View style={{ height: 20 }} />}
       />
     </SafeAreaView>
   );

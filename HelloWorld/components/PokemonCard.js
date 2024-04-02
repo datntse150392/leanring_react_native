@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 2,
     padding: 16,
-    margin: 16,
+    marginHorizontal: 20,
     ...Platform.select({
       ios: {
         shadowOffset: {
