@@ -1,50 +1,32 @@
-import { View, StyleSheet, Text, useWindowDimensions } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView } from "react-native";
 export default function App() {
-  const windowWidth = useWindowDimensions().width;
-  const windowHeight = useWindowDimensions().height;
   return (
-    <View style={styles.container}>
-      <View
-        style={[
-          styles.box,
-          {
-            width: windowWidth > 500 ? "70%" : "90%",
-            height: windowHeight > 800 ? "60%" : "90%",
-          },
-        ]}
-      >
-        <Text
-          style={[
-            styles.text,
-            {
-              fontSize: windowWidth > 500 ? 30 : 20,
-              color: "white",
-            },
-          ]}
-        >
-          Welcome to React Native!
-        </Text>
+    <SafeAreaView style={styles.safeAreaView}>
+      <View style={styles.container}>
+        <View style={[styles.box]}>
+          <Text style={[styles.text]}>Welcome to React Native!</Text>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeAreaView: {
+    backgroundColor: "plum",
+    flex: 1,
+  },
   container: {
     flex: 1,
-    width: "100%",
     backgroundColor: "plum",
     alignItems: "center",
-    justifyContent: "center",
   },
   box: {
-    borderColor: "black",
-    backgroundColor: "blue",
-
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
     textAlign: "center",
+    fontSize: 30,
   },
 });
