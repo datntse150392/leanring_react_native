@@ -27,3 +27,7 @@
 # 2. Expo vs ReactNative
 
 ###
+
+# 3. Build Mini Project: Pokemon Card
+
+<img src="./assets/a31639ff-7818-4d11-8009-b70da23107c2.jpg">

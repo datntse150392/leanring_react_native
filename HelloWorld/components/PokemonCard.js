@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 4,
     marginTop: 20,
-    width: "35%",
+    width: "45%",
   },
   typeEmoji: { fontSize: 30, marginRight: 12 },
   typeText: {
