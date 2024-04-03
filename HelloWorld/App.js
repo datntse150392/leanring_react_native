@@ -5,6 +5,7 @@ import {
   Platform,
   ScrollView,
   FlatList,
+  Text,
 } from "react-native";
 import PokemonCard from "./components/PokemonCard";
 import data from "./data.json";
@@ -27,6 +28,7 @@ export default function App() {
         // KeyExtractor is a function that takes an item and returns a unique key for that item.
         keyExtractor={(item) => item.name}
         ItemSeparatorComponent={<View style={{ height: 20 }} />}
+        ListEmptyComponent={<Text>No items Found</Text>}
       />
     </SafeAreaView>
   );
