@@ -8,11 +8,16 @@ import {
   Image,
   FlatList,
   ActivityIndicator,
+  TextInput,
+  Button,
 } from "react-native";
 export default function App() {
   const [postList, setPostList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [isPosting, setIsPosting] = useState(false);
+  const [postTitle, setPostTitle] = useState("");
+  const [postBody, setPostBody] = useState("");
 
   const fetchData = async (limit = 10) => {
     const response = await fetch(
@@ -43,30 +48,70 @@ export default function App() {
     setRefreshing(false);
   };
 
+  addPost = async () => {
+    setIsPosting(true);
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: postTitle,
+        body: postBody,
+      }),
+    });
+    const newPost = response.json();
+    setPostList([newPost, ...postList]);
+    setPostBody("");
+    setPostTitle("");
+    setIsPosting(false);
+  };
+
   return (
     <SafeAreaView>
-      <FlatList
-        data={postList}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => {
-          return (
-            <View style={styles.card}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text>{item.body}</Text>
-            </View>
-          );
-        }}
-        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-        ListEmptyComponent={() => <Text>Not post found</Text>}
-        ListHeaderComponent={() => (
-          <Text style={styles.textHeader}>Post List</Text>
-        )}
-        ListFooterComponent={() => (
-          <Text style={styles.textFooter}>End of the list</Text>
-        )}
-        refreshing={refreshing}
-        onRefresh={handleRefresh}
-      />
+      <>
+        <View style={styles.inputContainer}>
+          <TextInput
+            value={postTitle}
+            onChangeText={setPostTitle}
+            style={styles.input}
+            placeholder="Enter post title"
+          />
+          <TextInput
+            value={postBody}
+            onChangeText={setPostBody}
+            style={styles.input}
+            placeholder="Enter post body"
+          />
+          <Button
+            title={isPosting ? "Adding..." : "Add Post"}
+            onPress={addPost}
+            disabled={isPosting}
+          />
+        </View>
+        <FlatList
+          data={postList}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.card}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text>{item.body}</Text>
+              </View>
+            );
+          }}
+          ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+          ListEmptyComponent={() => <Text>Not post found</Text>}
+          ListHeaderComponent={() => (
+            <Text style={styles.textHeader}>Post List</Text>
+          )}
+          ListFooterComponent={() => (
+            <Text style={styles.textFooter}>End of the list</Text>
+          )}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
+        />
+      </>
     </SafeAreaView>
   );
 }
@@ -108,5 +153,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  inputContainer: {
+    padding: 16,
+    margin: 16,
+    backgroundColor: "grey",
+    borderRadius: 8,
+    borderWidth: 1,
+  },
+  input: {
+    marginBottom: 8,
+    borderWidth: 1,
+    padding: 5,
+    borderRadius: 5,
   },
 });
