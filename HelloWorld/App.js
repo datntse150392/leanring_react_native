@@ -7,12 +7,19 @@ import {
   StatusBar,
   TextInput,
   Button,
+  Image,
+  KeyboardAvoidingView,
 } from "react-native";
 export default function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <Image
+        resizeMode="contain"
+        style={styles.image}
+        source={require("./assets/008.png")}
+      />
       <View style={styles.form}>
         <Text style={styles.label}>Username</Text>
         <TextInput
@@ -31,7 +38,7 @@ export default function App() {
         />
         <Button title="Login" onPress={() => console.log("Login press")} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -69,5 +76,9 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     padding: 10,
     borderRadius: 5,
+  },
+  image: {
+    height: 300,
+    width: 200,
   },
 });
