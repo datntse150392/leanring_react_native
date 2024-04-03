@@ -28,6 +28,12 @@ export default function App() {
           autoCapitalize="none"
         />
         <Text style={styles.textName}>This name is: {name}</Text>
+
+        <TextInput
+          style={[styles.input, styles.multiline]}
+          placeholder="message"
+          multiline
+        />
       </View>
       <FlatList
         data={data.pokemon}
@@ -71,5 +77,9 @@ const styles = StyleSheet.create({
   textName: {
     margin: 12,
     fontSize: 20,
+  },
+  multiline: {
+    minHeight: 100,
+    textAlignVertical: "top",
   },
 });
