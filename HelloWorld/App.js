@@ -13,6 +13,18 @@ import {
 export default function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const vadiateForm = () => {
+    let errors = {};
+
+    if (!username) errors.username = "Username is required";
+    if (!password) errors.password = "Password is required";
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <Image
