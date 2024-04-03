@@ -6,20 +6,20 @@ import {
   ScrollView,
   FlatList,
   Text,
+  StatusBar,
+  TextInput,
 } from "react-native";
 import PokemonCard from "./components/PokemonCard";
 import data from "./data.json";
+import { useState } from "react";
 export default function App() {
+  const [name, setName] = useState("");
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      {/* <ScrollView>
-        <View style={styles.container}>
-          {data &&
-            data.pokemon.map((pokemon) => {
-              return <PokemonCard key={pokemon.name} {...pokemon} />;
-            })}
-        </View>
-      </ScrollView> */}
+    <SafeAreaView>
+      <View>
+        <TextInput style={styles.input} value={name} onChangeText={setName} />
+        <Text style={styles.textName}>This name is: {name}</Text>
+      </View>
       <FlatList
         data={data.pokemon}
         renderItem={({ item }) => {
@@ -39,18 +39,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  safeAreaView: {
-    backgroundColor: "f5f5f5",
-    flex: 1,
-  },
   container: {
     flex: 1,
     backgroundColor: "f5f5f5",
-    ...Platform.select({
-      ios: {
-        paddingTop: 20,
-      },
-    }),
+    paddingTop: StatusBar.currentHeight,
   },
   headerText: {
     fontSize: 24,
@@ -61,5 +53,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     marginVertical: 20,
+  },
+  input: {
+    padding: 12,
+    margin: 12,
+    borderWidth: 2,
+  },
+  textName: {
+    margin: 12,
+    fontSize: 20,
   },
 });
