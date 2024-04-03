@@ -1,70 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
   SafeAreaView,
   Text,
   StatusBar,
-  TextInput,
-  Button,
   Image,
-  KeyboardAvoidingView,
+  FlatList,
 } from "react-native";
 export default function App() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [postList, setPostList] = useState([]);
 
-  const vadiateForm = () => {
-    let errors = {};
+  const fetchData = async (limit = 10) => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`
+    );
 
-    if (!username) errors.username = "Username is required";
-    if (!password) errors.password = "Password is required";
-
-    setErrors(errors);
-    return Object.keys(errors).length === 0;
+    const data = await response.json();
+    setPostList(data);
   };
 
-  const handleSubmit = () => {
-    if (vadiateForm()) {
-      console.log("Form submitted", username, password);
-      setUsername("");
-      setPassword("");
-      setErrors({});
-    }
-  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <Image
-        resizeMode="contain"
-        style={styles.image}
-        source={require("./assets/008.png")}
+    <SafeAreaView>
+      <FlatList
+        data={postList}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => {
+          return (
+            <View style={styles.card}>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text>{item.body}</Text>
+            </View>
+          );
+        }}
+        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+        ListEmptyComponent={() => <View>Not post found</View>}
+        ListHeaderComponent={() => (
+          <Text style={styles.textHeader}>Post List</Text>
+        )}
+        ListFooterComponent={() => (
+          <Text style={styles.textFooter}>End of the list</Text>
+        )}
       />
-      <View style={styles.form}>
-        <Text style={styles.label}>Username</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your username"
-          value={username}
-          onChangeText={setUsername}
-        />
-        {errors.username && (
-          <Text style={styles.errorText}>{errors.username}</Text>
-        )}
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your password"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-        />
-        {errors.password && (
-          <Text style={styles.errorText}>{errors.password}</Text>
-        )}
-        <Button title="Login" onPress={() => handleSubmit()} />
-      </View>
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
@@ -76,39 +58,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  form: {
-    width: "70%",
+  card: {
     backgroundColor: "white",
-    padding: 20,
-    borderRadius: 10,
-    shadowColor: "black",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 5,
+    borderRadius: 16,
+    borderWidth: 2,
+    padding: 16,
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
+  textHeader: {
+    fontSize: 24,
     fontWeight: "bold",
+    textAlign: "center",
+    marginVertical: 20,
   },
-  input: {
-    height: 40,
-    borderColor: "#ddd",
-    borderWidth: 1,
+  textFooter: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 20,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
     marginBottom: 10,
-    padding: 10,
-    borderRadius: 5,
-  },
-  image: {
-    height: 300,
-    width: 200,
-  },
-  errorText: {
-    color: "red",
-    marginBottom: 5,
   },
 });
