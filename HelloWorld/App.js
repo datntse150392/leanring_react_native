@@ -29,6 +29,10 @@ export default function App() {
         keyExtractor={(item) => item.name}
         ItemSeparatorComponent={<View style={{ height: 20 }} />}
         ListEmptyComponent={<Text>No items Found</Text>}
+        ListHeaderComponent={
+          <Text style={styles.headerText}>Pokemon List</Text>
+        }
+        ListFooterComponent={<Text style={styles.footerText}>End of List</Text>}
       />
     </SafeAreaView>
   );
@@ -47,5 +51,15 @@ const styles = StyleSheet.create({
         paddingTop: 20,
       },
     }),
+  },
+  headerText: {
+    fontSize: 24,
+    textAlign: "center",
+    marginVertical: 20,
+  },
+  footerText: {
+    fontSize: 24,
+    textAlign: "center",
+    marginVertical: 20,
   },
 });
