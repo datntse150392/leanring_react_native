@@ -1,103 +1,73 @@
+import { useState } from "react";
 import {
   View,
   StyleSheet,
   SafeAreaView,
-  Platform,
-  ScrollView,
-  FlatList,
   Text,
   StatusBar,
   TextInput,
-  Switch,
+  Button,
 } from "react-native";
-import PokemonCard from "./components/PokemonCard";
-import data from "./data.json";
-import { useState } from "react";
 export default function App() {
-  const [name, setName] = useState("");
-  const [isSwitch, setIsSwitch] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   return (
-    <SafeAreaView>
-      <View>
+    <View style={styles.container}>
+      <View style={styles.form}>
+        <Text style={styles.label}>Username</Text>
         <TextInput
           style={styles.input}
-          value={name}
-          onChangeText={setName}
-          placeholder="email@example.com"
-          // secureTextEntry
-          // keyboardType="numeric"
-          autoCorrect={false}
-          autoCapitalize="none"
+          placeholder="Enter your username"
+          value={username}
+          onChangeText={setUsername}
         />
-        <Text style={styles.textName}>This name is: {name}</Text>
-
+        <Text style={styles.label}>Password</Text>
         <TextInput
-          style={[styles.input, styles.multiline]}
-          placeholder="message"
-          multiline
+          style={styles.input}
+          placeholder="Enter your password"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
         />
+        <Button title="Login" onPress={() => console.log("Login press")} />
       </View>
-
-      <View style={styles.switchContainer}>
-        <Text style={styles.textName}>Dark Mode</Text>
-        <Switch
-          value={isSwitch}
-          onValueChange={() => setIsSwitch((preValue) => !preValue)}
-          trackColor={{ true: "black" }}
-          thumbColor={"pink"}
-        />
-      </View>
-      <FlatList
-        data={data.pokemon}
-        renderItem={({ item }) => {
-          return <PokemonCard key={item.name} {...item} />;
-        }}
-        // KeyExtractor is a function that takes an item and returns a unique key for that item.
-        keyExtractor={(item) => item.name}
-        ItemSeparatorComponent={<View style={{ height: 20 }} />}
-        ListEmptyComponent={<Text>No items Found</Text>}
-        ListHeaderComponent={
-          <Text style={styles.headerText}>Pokemon List</Text>
-        }
-        ListFooterComponent={<Text style={styles.footerText}>End of List</Text>}
-      />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "f5f5f5",
+    backgroundColor: "#f5f5f5",
     paddingTop: StatusBar.currentHeight,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  headerText: {
-    fontSize: 24,
-    textAlign: "center",
-    marginVertical: 20,
+  form: {
+    width: "70%",
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
-  footerText: {
-    fontSize: 24,
-    textAlign: "center",
-    marginVertical: 20,
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+    fontWeight: "bold",
   },
   input: {
-    padding: 12,
-    margin: 12,
-    borderWidth: 2,
-  },
-  textName: {
-    margin: 12,
-    fontSize: 20,
-  },
-  multiline: {
-    minHeight: 100,
-    textAlignVertical: "top",
-  },
-  switchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 10,
+    height: 40,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    marginBottom: 15,
+    padding: 10,
+    borderRadius: 5,
   },
 });
