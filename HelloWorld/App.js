@@ -7,9 +7,11 @@ import {
   StatusBar,
   Image,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 export default function App() {
   const [postList, setPostList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async (limit = 10) => {
     const response = await fetch(
@@ -18,11 +20,21 @@ export default function App() {
 
     const data = await response.json();
     setPostList(data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="blue" />
+        <Text>Loading ...</Text>
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView>
@@ -38,7 +50,7 @@ export default function App() {
           );
         }}
         ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-        ListEmptyComponent={() => <View>Not post found</View>}
+        ListEmptyComponent={() => <Text>Not post found</Text>}
         ListHeaderComponent={() => (
           <Text style={styles.textHeader}>Post List</Text>
         )}
@@ -76,11 +88,16 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    marginTop: 20,
+    marginVertical: 20,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
