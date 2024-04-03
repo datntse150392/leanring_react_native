@@ -8,12 +8,14 @@ import {
   Text,
   StatusBar,
   TextInput,
+  Switch,
 } from "react-native";
 import PokemonCard from "./components/PokemonCard";
 import data from "./data.json";
 import { useState } from "react";
 export default function App() {
   const [name, setName] = useState("");
+  const [isSwitch, setIsSwitch] = useState(false);
   return (
     <SafeAreaView>
       <View>
@@ -33,6 +35,16 @@ export default function App() {
           style={[styles.input, styles.multiline]}
           placeholder="message"
           multiline
+        />
+      </View>
+
+      <View style={styles.switchContainer}>
+        <Text style={styles.textName}>Dark Mode</Text>
+        <Switch
+          value={isSwitch}
+          onValueChange={() => setIsSwitch((preValue) => !preValue)}
+          trackColor={{ true: "black" }}
+          thumbColor={"pink"}
         />
       </View>
       <FlatList
@@ -81,5 +93,11 @@ const styles = StyleSheet.create({
   multiline: {
     minHeight: 100,
     textAlignVertical: "top",
+  },
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
   },
 });
