@@ -22,8 +22,16 @@ export default function App() {
     if (!password) errors.password = "Password is required";
 
     setErrors(errors);
-
     return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = () => {
+    if (vadiateForm()) {
+      console.log("Form submitted", username, password);
+      setUsername("");
+      setPassword("");
+      setErrors({});
+    }
   };
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -40,6 +48,9 @@ export default function App() {
           value={username}
           onChangeText={setUsername}
         />
+        {errors.username && (
+          <Text style={styles.errorText}>{errors.username}</Text>
+        )}
         <Text style={styles.label}>Password</Text>
         <TextInput
           style={styles.input}
@@ -48,7 +59,10 @@ export default function App() {
           value={password}
           onChangeText={setPassword}
         />
-        <Button title="Login" onPress={() => console.log("Login press")} />
+        {errors.password && (
+          <Text style={styles.errorText}>{errors.password}</Text>
+        )}
+        <Button title="Login" onPress={() => handleSubmit()} />
       </View>
     </KeyboardAvoidingView>
   );
@@ -85,12 +99,16 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "#ddd",
     borderWidth: 1,
-    marginBottom: 15,
+    marginBottom: 10,
     padding: 10,
     borderRadius: 5,
   },
   image: {
     height: 300,
     width: 200,
+  },
+  errorText: {
+    color: "red",
+    marginBottom: 5,
   },
 });
