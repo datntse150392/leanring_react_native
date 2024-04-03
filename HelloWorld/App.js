@@ -12,6 +12,7 @@ import {
 export default function App() {
   const [postList, setPostList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
   const fetchData = async (limit = 10) => {
     const response = await fetch(
@@ -36,6 +37,12 @@ export default function App() {
     );
   }
 
+  handleRefresh = () => {
+    setRefreshing(true);
+    fetchData(10);
+    setRefreshing(false);
+  };
+
   return (
     <SafeAreaView>
       <FlatList
@@ -57,6 +64,8 @@ export default function App() {
         ListFooterComponent={() => (
           <Text style={styles.textFooter}>End of the list</Text>
         )}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
       />
     </SafeAreaView>
   );
