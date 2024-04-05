@@ -9,7 +9,11 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="About">
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="About" component={About} />
+        <Stack.Screen
+          name="About"
+          component={About}
+          initialParams={{ name: "Guest" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
