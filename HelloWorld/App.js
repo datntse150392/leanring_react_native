@@ -1,28 +1,17 @@
-import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Home } from "./components/home";
 import { About } from "./components/about";
-const Drawer = createDrawerNavigator();
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen
-          name="Hosme"
-          component={Home}
-          options={{
-            title: "Home Screen",
-            drawerLabel: "Home",
-            drawerActiveTintColor: "red",
-            drawerContentStyle: {
-              backgroundColor: "lightblue",
-            },
-          }}
-        />
-        <Drawer.Screen name="About" component={About} />
-      </Drawer.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="About" component={About} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
