@@ -1,24 +1,10 @@
-import { useLayoutEffect } from "react";
 import { View, Text, Button } from "react-native";
-export function Home({ route, navigation }) {
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: name,
-    });
-  }, []);
-  const { name } = route.params;
+export function Home({ navigation }) {
   return (
     <View>
       <Text>Home Screen</Text>
-      <Text>{name}</Text>
-      <Button
-        title="Update params"
-        onPress={() =>
-          navigation.setParams({
-            name: "dsdasa",
-          })
-        }
-      />
+      <Button title="toggle drawer" onPress={() => navigation.toggleDrawer()} />
+      <Button title="GO TO ABOUT" onPress={() => navigation.jumpTo("About")} />
     </View>
   );
 }
