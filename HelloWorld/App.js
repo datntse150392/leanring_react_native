@@ -4,6 +4,7 @@ import { Home } from "./components/home";
 import { About } from "./components/about";
 import { Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { AboutStack } from "./AppStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +27,7 @@ export default function App() {
             tabBarBadge: 3,
           }}
         />
-        <Tab.Screen name="About" component={About} />
+        <Tab.Screen name="About Stack" component={AboutStack} />
       </Tab.Navigator>
     </NavigationContainer>
   );
